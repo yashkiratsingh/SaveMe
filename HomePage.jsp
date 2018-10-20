@@ -8,8 +8,8 @@
 <title>SEP</title>
 <link rel='stylesheet' type="text/css" href="HomePage.css">
 <script>
-	var divs = [ "Menu1", "Menu2", "Menu3", "Menu4", "Menu5", "Menu6", "Menu7",
-			"Menu8" ];
+	var divs = [ "Menu1", "Menu2", "Menu3", "Menu4", "Menu5", "Menu6",
+			  ];
 	var visibleDivId = null;
 	function toggleVisibility(divId) {
 		if (visibleDivId === divId) {
@@ -37,20 +37,18 @@
 	<div class="nav">
 		<h1>SaveMe</h1>
 		<ul>
-			<li><a href="#" onclick="toggleVisibility('Menu8')">About Us</a></li>
-			<li><a href="#" onclick="toggleVisibility('Menu7')">Advisor
+			<li><a href="#" onclick="toggleVisibility('Menu6')">About Us</a></li>
+			<li><a href="#" onclick="toggleVisibility('Menu5')">Advisor
 					Panel</a></li>
 			<li><a>Advisor</a>
 				<ul>
-					<li><a href="#" onclick="toggleVisibility('Menu5')">Login</a></li>
+					<li><a href="#" onclick="toggleVisibility('Menu2')">Login</a></li>
 				</ul></li>
-			<li><a href="#" onclick="toggleVisibility('Menu4')">Guest
-					User</a></li>
 			<li><a>User</a>
 				<ul>
 					<li><a href="#" onclick="toggleVisibility('Menu3')">Sign
 							Up</a></li>
-					<li><a href="#" onclick="toggleVisibility('Menu2')">Login</a></li>
+					<li><a href="#" onclick="toggleVisibility('Menu4')">Login</a></li>
 				</ul></li>
 			<li><a href="#" onclick="toggleVisibility('Menu1')">Home</a></li>
 		</ul>
@@ -62,15 +60,14 @@
 	<br>
 	<br>
 	<br>
-	<br>
 	<div class="body">
 		<br>
 		<div id="Menu1">
-			<p>Home</p>
+			<p>Helping Hand for Helpless</p>
 		</div>
 		<div id="Menu3" style="display: none">
 			<h3>User Sign Up</h3>
-				<form action="UserSignUp.jsp" method="post">
+				<form action="UserSignup.jsp" method="post">
 			<table cellspacing="20">
 					<tr>
 						<td>Name: </td>
@@ -100,18 +97,18 @@
 				</tr>
 				<tr>
 						<td colspan="2" align="center"><input type="submit"
-							value="Submit"></td>
+							value="Sign Up"></td>
 					</tr>
 			</table>
 				</form>
 		</div>
-		<div id="Menu2" style="display: none">
+		<div id="Menu4" style="display: none">
 			<h3>User Log In</h3>
 			<table cellspacing="20">
 				<form action="UserLogin.jsp" method="post">
 					<tr>
-					<td>Email: </td>
-					<td><input type="text" name="email" required autofocus
+					<td>UserID </td>
+					<td><input type="text" name="username" required autofocus
 						placeholder="Email"></td>
 				</tr>
 				<tr>
@@ -121,70 +118,72 @@
 				</tr>
 				<tr>
 						<td colspan="2" align="center"><input type="submit"
-							value="Submit"></td>
+							value="Log In"></td>
 					</tr>
 			</form>
 			</table>
 		</div>
-		<div id="Menu4" style="display: none">
-			<h3>Guest User</h3>
-			<table cellspacing="20">
-				<form action="UserLogin.jsp" method="post">
-									<tr>
-						<td>Name: </td>
-						<td><input type="text" name="name" required autofocus
-							placeholder="Name"></td>
-					</tr>
-
-					<tr>
-						<td>Age: </td>
-						<td><input type="number" name="age" required autofocus
-							placeholder="Age"></td>
-					</tr>
-					<tr>
-						<td>Gender: </td>
-						<td><input type="radio" name="gender" value="Male">Male
-							<input type="radio" name="gender" value="Female">Female <input
-							type="radio" name="gender" value="Other">Other</td>
-					</tr>
-				<tr>
-					<td>Email: </td>
-					<td><input type="text" name="email" required autofocus
-						placeholder="Email"></td>
-				</tr>
-				<tr>
-						<td>Enter Problem: </td>
-						<td><textarea required autofocus name="prob"></textarea></td>
-					</tr>
-					<tr>
-						<td colspan="2" align="center"><input type="submit"
-							value="Submit"></td>
-					</tr>
-		</form>
-			</table>
-		</div>
-		<div id="Menu5" style="display: none">
+				<div id="Menu2" style="display: none">
 			<h3>Advisor Log In</h3>
 			<table cellspacing="20">
-				<form action="UserLogin.jsp" method="post">
+				<form action="mailer.jsp" method="post">
 					<tr>
 					<td>Advisor ID: </td>
 					<td><input type="text" name="email" required autofocus
 						placeholder="Email"></td>
 				</tr>
-				<tr>
-					<td>Password: </td>
-					<td><input required autofocus type="password" name="pass"
-						placeholder="Password"></td>
-				</tr>
+				 
 				<tr>
 						<td colspan="2" align="center"><input type="submit"
-							value="Submit"></td>
+							value="Log In"></td>
 					</tr>
 			</form>
 			</table>
 		</div>
+		<div id="Menu5" style="display: none">
+			<h3>Advisor Panel</h3>
+			<%
+				Class.forName("com.mysql.jdbc.Driver");
+				Connection co1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/SaveMe", "root", "spjisspj");
+				Statement st1 = co1.createStatement();
 
+				ResultSet rs2 = st1.executeQuery("select * from exp_info");
+
+				ResultSetMetaData rsmd2 = rs2.getMetaData();
+
+				int columns2 = rsmd2.getColumnCount();
+			%>
+
+			<table border="2px" bordercolor="white" cellspacing="5px"
+				style="border-collapse: collapse; padding: 0;">
+				<tr>
+					<th>Name</th>
+					<th>Advisor ID</th>
+					<th>Field</th>
+					<th>Contact</th>
+					<th>Email</th>
+					<th>Organization</th>
+				</tr>
+				<%
+					while (rs2.next()) {
+						out.println("<tr>");
+						for (int i = 1; i <= columns2; i++) {
+							String columnName = rsmd2.getColumnName(i);
+
+							String columnData = rs2.getString(columnName);
+							out.println("<td>" + columnData + "</td>");
+						}
+						out.println("</tr>");
+					}
+					co1.close();
+				%>
+			</table>
+		</div>
+<div id="Menu6" style="display: none">
+			<h2>About Us</h2>
+			<h4>   
+			we are here to help, counsel you, without sharing your information to anyone, feel free to ask from our experienced expert panel. <br>
+			</h4></div>
 	</div>
 		<hr>
 		<footer>
