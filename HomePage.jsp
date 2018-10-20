@@ -184,45 +184,7 @@
 			</form>
 			</table>
 		</div>
-		<div id="Menu7" style="display: none">
-			<h3>Advisor Panel</h3>
-			<%
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection co = DriverManager.getConnection("jdbc:mysql://localhost:3306/SaveMe", "root", "spjisspj");
-			Statement st = co.createStatement();	
-			
-				ResultSet rs1 = st.executeQuery("select * from exp_info");
 
-				ResultSetMetaData rsmd1 = rs1.getMetaData();
-
-				int columns1 = rsmd1.getColumnCount();
-			%>
-
-			<table border="2px" bordercolor="white" cellspacing="5px"
-				style="border-collapse: collapse; padding: 0;">
-				<tr>
-					<th>Name</th>
-					<th>Advisor ID</th>
-					<th>Field</th>
-					<th>Contact</th>
-					<th>Email</th>
-					<th>Organization</th>
-				</tr>
-				<%
-					while (rs1.next()) {
-						out.println("<tr>");
-						for (int i = 1; i <= columns1; i++) {
-							String columnName = rsmd1.getColumnName(i);
-
-							String columnData = rs1.getString(columnName);
-							out.println("<td>" + columnData + "</td>");
-						}
-						out.println("</tr>");
-					}
-				co.close();
-				%>
-			</table>
-		</div>
 	</div>
 		<hr>
 		<footer>
