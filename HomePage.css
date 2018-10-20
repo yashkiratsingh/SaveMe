@@ -6,15 +6,15 @@
 }
 
 body {
-	background-image: url('pic.jpg');
+	background-image: url('hand-wallpaper.jpg');
 	background-repeat: no-repeat;
 	background-size: cover;
 	font-family: Segeo Script;
-	color: white;
+	color: #7f5056;
 }
 
 .nav {
-	background: #ffffff24;
+	background: #00000024;
 	width: 100%;
 	height: 60px;
 	line-height: 40px;
@@ -22,7 +22,7 @@ body {
 
 .nav h1 {
 	float: left;
-	color: white;
+	color: #7f5056;
 	display: block;
 	line-height: 60px;
 	font-size: 35px;
@@ -37,16 +37,17 @@ body {
 .nav ul li {
 	float: right;
 	height: 60px;
-	line-height: 60px;
+	font-weight:bolder;
+	line-height: 85px;
 	text-align: center;
 	width: 150px;
 }
 
 .nav ul li a {
 	text-decoration: none;
-	color: white;
+	color: #7f5056;
 	display: block;
-	font-size: 20px;
+	font-size: 30px;
 }
 
 .nav ul li a:hover {
@@ -61,24 +62,24 @@ body {
 
 .nav ul li:hover ul li {
 	display: block;
-	background: #ffffff24;
+	background: #00000024;
 }
 
 .body {
 	width: 600px;
-	color: white;
+	color: #7f5056;
 	text-align: center;
 	height: auto;
 	margin-left: auto;
 	margin-right: auto;
-	background: #ffffff0f;
+	background: #0000000f;
 	border-radius: 15px;
 	font-size: 20px;
-	box-shadow: 0px 0px 10px 0px white;
+	box-shadow: 0px 0px 10px 0px #7f5056;
 }
 
 .body p {
-	color: white;
+	color: #7f5056;
 	font-size: 30px;
 }
 
@@ -90,7 +91,7 @@ body {
 
 .body div a {
 	text-decoration: none;
-	color: white;
+	color: #7f5056;
 	display: block;
 }
 
@@ -99,18 +100,26 @@ input[type="text"], [type="password"], [type="email"], [type="number"],
 	border-radius: 5px;
 	border-style: inset;
 	line-height: 20px;
-	color: white;
-	background: #ffffff24;
+	color: #7f5056;
+	background: #00000024;
+}
+
+textarea{
+	border-radius: 5px;
+	border-style: inset;
+	line-height: 20px;
+	color: #7f5056;
+	background: #00000024;
 }
 
 ::placeholder {
-	color: white;
+	color: #7f5056;
 }
 
 input[type="submit"], [type="reset"] {
 	height: 35px;
 	width: 100px;
-	color: white;
+	color: #7f5056;
 	font-size:20px;
 	border-radius: 5px;
 	border-style: outset;
@@ -128,7 +137,7 @@ input[type="submit"]:hover, [type="reset"]:hover {
 #Menu3 button {
 	height: 35px;
 	width: 100px;
-	color: white;
+	color: #7f5056;
 	border-radius: 5px;
 	border-style: outset;
 	background: #0000007a;
@@ -146,12 +155,12 @@ hr {
 	width: 95%;
 	margin: 10px auto;
 	height: 1px;
-	background: white;
+	background: #7f5056;
 }
 
 .footer {
 	background: #00000030;
-	color: white;
+	color: #7f5056;
 }
 
 .footer h2 {
