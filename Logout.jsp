@@ -7,7 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-<% session.invalidate(); %>
+<% response.setHeader("Cache-Control", "no-cache, no-store,must-revalidate");
+int s=Integer.parseInt(request.getParameter("ii"));
+    if(s==1) session.removeAttribute("us");
+    else if(s==2) session.removeAttribute("em");
+ %>
 <jsp:forward page="HomePage.jsp"></jsp:forward>
 </body>
 </html>

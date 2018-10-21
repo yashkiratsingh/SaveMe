@@ -6,10 +6,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Admin</title>
+<style type="text/css">
+	tr,td,th{
+		padding:10px;	
+		text-align:center;
+	}
+</style>
 <link rel='stylesheet' type="text/css" href="DashBoard.css">
 <script>
-	var divs = [ "Menu0", "Menu1", "Menu2", "Menu3", "Menu4", "Menu5", "Menu6",
-			"Menu7", "Menu8", "Menu9" ];
+	var divs = [ "Menu0", "Menu1", "Menu2", "Menu3", "Menu4"];
 	var visibleDivId = null;
 	function toggleVisibility(divId) {
 		if (visibleDivId === divId) {
@@ -33,12 +38,11 @@
 	}
 </script>
 </head>
-<body>
+<body><%response.setHeader("Cache-Control", "no-cache, no-store,must-revalidate"); %>
 	<div class="nav">
 		<pre>SaveMe</pre>
 		<ul>
-			<li><a href="#">Contact Us</a></li>
-			<li><a href="#">Log Out</a></li>
+			<li><a href="Logout.jsp?ii=1">Log Out</a></li>
 		</ul>
 	</div>
 	<div class="sidebar">
@@ -60,62 +64,62 @@
 	<br>
 	<br>
 	<div class="main">
-		<div id="Menu0">Home</div>
+		<div id="Menu0">Welcome Home!!!!</div>
 		<div id="Menu1" style="display: none">
 			<h3>Profile</h3>
-			<%
+			<%  
+			   String Id=(String)session.getAttribute("us");
 				Class.forName("com.mysql.jdbc.Driver");
 				Connection co = DriverManager.getConnection("jdbc:mysql://localhost:3306/SaveMe", "root", "spjisspj");
 				Statement st = co.createStatement();
 
-				ResultSet rs1 = st.executeQuery("select * from user_info");
+				ResultSet rs = st.executeQuery("select * from user_info where userID='"+Id+"'");
+				while (rs.next()) {
+					%>
+
+					<table border="0" cellspacing="10px"
+						style="padding: 3px;">
+						<tr>
+							<td>Name:</td>
+							<td><%=rs.getString("name")%>
+						</tr>
+						<tr>
+							<td>User ID:</td>
+							<td><%=rs.getString("userID")%>
+						</tr>
+						<tr>
+							<td>Gender:</td>
+							<td><%=rs.getString("gender")%>
+						</tr>
+						<tr>
+							<td>Age:</td>
+							<td><%=rs.getString("age")%>
+						</tr>
+						<tr>
+							<td>Email:</td>
+							<td><%=rs.getString("email")%>
+						</tr>
+					</table>
+					<%
+						}
+					%>
+				</div>
+		<div id="Menu2" style="display: none">
+			<h3>Advisor Panel</h3>
+			<%
+				Class.forName("com.mysql.jdbc.Driver");
+				Connection co1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/SaveMe", "root", "spjisspj");
+				Statement st1 = co1.createStatement();
+
+				ResultSet rs1 = st1.executeQuery("select * from exp_info");
 
 				ResultSetMetaData rsmd1 = rs1.getMetaData();
 
 				int columns1 = rsmd1.getColumnCount();
 			%>
 
-			<table border="2px" bordercolor="white" cellspacing="5px"
-				style="border-collapse: collapse; padding: 0;">
-				<tr>
-					<th>User ID</th>
-					<th>Name</th>
-					<th>Age</th>
-					<th>Gender</th>
-					<th>Email</th>
-				</tr>
-				<%
-					while (rs1.next()) {
-						out.println("<tr>");
-						for (int i = 1; i <= columns1; i++) {
-							String columnName = rsmd1.getColumnName(i);
-
-							String columnData = rs1.getString(columnName);
-							out.println("<td>" + columnData + "</td>");
-						}
-						out.println("</tr>");
-					}
-					co.close();
-				%>
-			</table>
-
-		</div>
-		<div id="Menu2" style="display: none">
-			<h3>Advisor Panel</h3>
-			<%
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection co1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/SaveMe", "root", "spjisspj");
-				Statement st1 = co.createStatement();
-
-				ResultSet rs2 = st1.executeQuery("select * from exp_info");
-
-				ResultSetMetaData rsmd2 = rs2.getMetaData();
-
-				int columns2 = rsmd1.getColumnCount();
-			%>
-
-			<table border="2px" bordercolor="white" cellspacing="5px"
-				style="border-collapse: collapse; padding: 0;">
+			<table border="0" cellspacing="10px"
+						style="padding: 3px;">
 				<tr>
 					<th>Name</th>
 					<th>Advisor ID</th>
@@ -125,15 +129,15 @@
 					<th>Organization</th>
 				</tr>
 				<%
-					while (rs2.next()) {
-						out.println("<tr>");
-						for (int i = 1; i <= columns1; i++) {
-							String columnName = rsmd2.getColumnName(i);
+						while (rs1.next()) {
+							%><tr><%
+							for (int i = 1; i <= columns1; i++) {
+								String columnName = rsmd1.getColumnName(i);
 
-							String columnData = rs2.getString(columnName);
-							out.println("<td>" + columnData + "</td>");
-						}
-						out.println("</tr>");
+								String columnData = rs1.getString(columnName);
+								%><td><%=columnData%></td><%
+							}
+							%></tr><%
 					}
 					co.close();
 				%>
@@ -142,7 +146,7 @@
 		<div id="Menu3" style="display: none">
 			<h3>Ask A Question</h3>
 			<table cellspacing="20">
-				<form action="UserLogin.jsp" method="post">
+				<form action="Quesh.jsp" method="post">
 				<tr>
 					<td>Advisor Id: </td>
 					<td><input type="text" name="id" required autofocus
@@ -159,38 +163,38 @@
 				</form>
 			</table>
 		</div>
-		<div id="Menu1" style="display: none">
-			<h3>Profile</h3>
+		<div id="Menu4" style="display: none">
+			<h3>My Questions</h3>
 			<%
 				Class.forName("com.mysql.jdbc.Driver");
 				Connection co3 = DriverManager.getConnection("jdbc:mysql://localhost:3306/SaveMe", "root", "spjisspj");
 				Statement st3 = co3.createStatement();
 
-				ResultSet rs3 = st3.executeQuery("select * from ques_info");
+				ResultSet rs3 = st3.executeQuery("select * from ques where userid='"+Id+"'");
 
 				ResultSetMetaData rsmd3 = rs3.getMetaData();
 
 				int columns3 = rsmd3.getColumnCount();
 			%>
 
-			<table border="2px" bordercolor="white" cellspacing="5px"
-				style="border-collapse: collapse; padding: 0;">
+			<table border="0px">
 				<tr>
 					<th>User ID</th>
 					<th>Advisor ID</th>
 					<th>Question</th>
 					<th>Solution</th>
+					<th>Question ID</th>
 				</tr>
 				<%
 					while (rs3.next()) {
-						out.println("<tr>");
+						%><tr><%
 						for (int i = 1; i <= columns3; i++) {
-							String columnName = rsmd3.getColumnName(i);
+							String columnName1 = rsmd3.getColumnName(i);
 
-							String columnData = rs3.getString(columnName);
-							out.println("<td>" + columnData + "</td>");
+							String columnData1 = rs3.getString(columnName1);
+							%><td><%=columnData1%></td><%
 						}
-						out.println("</tr>");
+						%></tr><%
 					}
 					co.close();
 				%>
