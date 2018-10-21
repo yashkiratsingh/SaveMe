@@ -182,7 +182,10 @@
 <div id="Menu6" style="display: none">
 			<h2>About Us</h2>
 			<h4>   
-			we are here to help, counsel you, without sharing your information to anyone, feel free to ask from our experienced expert panel. <br>
+			We are here to help, counsel you, without sharing your information to anyone, feel free to ask from our experienced expert panel. <br>
+			
+			Email us at:- demoapi786@gmail.com,
+			We would like to recieve further suggestions about making this portal Better. 
 			</h4></div>
 	</div>
 		<hr>
